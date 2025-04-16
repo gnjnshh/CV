@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
             company: "Morningstar India Financial Services",
             location: "Mumbai, India",
             title: "Research Associate",
-            dates: "Jan 2019 - Jan 2020",
+            dates: "Sept 2019 - March 2020",
             details: [
                 "Worked under the Pitchbook team, which provides financial data on VC, PE, and M&A space covering the global market.",
                 "Collated key data points on private companies in Venture Capital and Early-Stage space primarily in the NA (North America) region.",
