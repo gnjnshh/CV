@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             company: "University of Connecticut, Stamford",
             location: "Stamford, CT, USA",
             title: "Math Tutor",
-            dates: "Jan 2022 - Jan 2023",
+            dates: "Sept 2023 - Dec 2023",
             details: [
                 "Conducted personalized tutoring sessions for students at the University of Connecticut, Stamford, specializing in a comprehensive range of mathematical disciplines, including Algebra, Geometry, and Advanced Trigonometry, successfully clarifying concepts and solving queries to enhance academic performance.",
                 "Awarded 'Tutor of the Month' for September '23."
