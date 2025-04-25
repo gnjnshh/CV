@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error("Skills section not found");
     }
 
-
     // --- Interactive Experience Timeline ---
 
     // Experience Data (Extracted from CV)
