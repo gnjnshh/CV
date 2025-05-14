@@ -158,7 +158,7 @@
             font-size: 12px;
         }
 
-        /* Experience Timeline */
+        /* Timeline Styling (for both Experience and Education) */
         .timeline-container {
             position: relative;
             margin-bottom: 20px; /* Space before details */
@@ -235,7 +235,7 @@
             background: #0059b3;
         }
 
-        #experience-details {
+        .timeline-details { /* Generic class for details area */
             margin-top: 20px;
             padding: 20px;
             background: #eaf2f8; /* Very light blue background */
@@ -243,7 +243,7 @@
             border: 1px solid #d1e0ec;
             min-height: 100px; /* Ensure it has some height even when empty */
         }
-        #experience-details h3 {
+        .timeline-details h3 {
             margin-bottom: 10px;
             color: #003366;
         }
@@ -418,44 +418,29 @@
 
     <section id="education" class="container section">
         <h2>Education</h2>
-        <div class="education-item">
-            <h3>University of Connecticut (UCONN), Stamford, CT, USA</h3>
-            <p>Master's in Science (MSc) in Financial Risk Management (FRM)</p>
-            <p><i>Aug 2022 – Dec 2023</i></p>
+        <div class="timeline-container">
+            <div class="timeline" id="education-timeline">
+                 </div>
+             <div class="timeline-nav">
+                <button id="prev-edu">&lt; Prev</button>
+                <button id="next-edu">Next &gt;</button>
+            </div>
         </div>
-        <div class="education-item">
-            <h3>Chartered Financial Analyst (CFA) Institute, Mumbai, India</h3>
-            <p>Level III Candidate of Chartered Financial Analyst (CFA) program</p>
-            <p><i>2018 - 2022</i></p>
-        </div>
-         <div class="education-item">
-            <h3>Association of Chartered Certified Accountants (ACCA), Mumbai, India</h3>
-            <p>Affiliate Member (IFRS accounting, Audit, and Assurance, Financial Management, Corporate Law, and Taxation)</p>
-            <p><i>Jan 2016 - Jan 2018</i></p>
-        </div>
-         <div class="education-item">
-            <h3>Institute of Management (IIM) Indore, Indore, India</h3>
-            <p>Business Analytics (IPBA)</p>
-            <p><i>Jan 2019 - Jan 2020</i></p>
-        </div>
-         <div class="education-item">
-            <h3>Gujarat University, Ahmedabad, India</h3>
-            <p>Bachelor of Commerce (B.com)</p>
-            <p><i>Jan 2014 - Jan 2017</i></p>
-        </div>
+        <div id="education-details" class="timeline-details">
+            </div>
     </section>
 
     <section id="experience" class="container section">
         <h2>Work Experience</h2>
         <div class="timeline-container">
-            <div class="timeline">
+            <div class="timeline" id="experience-timeline">
                  </div>
              <div class="timeline-nav">
                 <button id="prev-exp">&lt; Prev</button>
                 <button id="next-exp">Next &gt;</button>
             </div>
         </div>
-        <div id="experience-details">
+        <div id="experience-details" class="timeline-details">
             </div>
     </section>
 
@@ -516,6 +501,12 @@
             // Set current year in footer
             document.getElementById('year').textContent = new Date().getFullYear();
 
+            // --- Scroll to Top on Load ---
+             window.onload = function() {
+                 window.scrollTo(0, 0);
+             };
+
+
             // --- Skill Bar Animation ---
             const skillsSection = document.querySelector('#skills');
             const skillLevels = document.querySelectorAll('#skills .level');
@@ -541,87 +532,65 @@
                 console.error("Skills section not found");
             }
 
-            // --- Interactive Experience Timeline ---
+            // --- Interactive Timeline Functions ---
 
-            // Experience Data (Extracted from CV)
-            const experiences = [
-                {
-                    company: "Datanimbus, INC",
-                    location: "Plano, TX, USA",
-                    title: "Business Development Analyst",
-                    dates: "Apr 2024 – Nov 2024",
-                    details: [
-                        "Supported business development and sales teams by assisting account executives, writing database queries, and building insightful tools for data-driven decision making.",
-                        "Led qualitative and quantitative analysis on the Datanimbus Finhub platform, empowering Financial Institutions with data and AI-driven advancements for new revenue streams, operational efficiency, and risk mitigation.",
-                        "Developed and maintained automated reports utilizing SQL and Python, providing actionable insights to internal business stakeholders and external partners."
-                    ] //
-                },
-                {
-                    company: "University of Connecticut, Stamford",
-                    location: "Stamford, CT, USA",
-                    title: "Math Tutor",
-                    dates: "Sept 2023 - Dec 2023",
-                    details: [
-                        "Conducted personalized tutoring sessions for students at the University of Connecticut, Stamford, specializing in a comprehensive range of mathematical disciplines, including Algebra, Geometry, and Advanced Trigonometry, successfully clarifying concepts and solving queries to enhance academic performance.",
-                        "Awarded 'Tutor of the Month' for September '23."
-                    ] //
-                },
-                {
-                    company: "Citicorp Services India Pvt. Ltd (Citi Group)",
-                    location: "Mumbai, India",
-                    title: "Credit Analyst",
-                    dates: "Jan 2021 - Jan 2022",
-                    details: [
-                        "Worked in the Independent Risk Assessment Unit (IRAU) of the bank.",
-                        "Performed fundamental credit analysis and communicated key findings in yearly and quarterly credit memos to various stakeholders for Banks, NBCF's and other financial institutions for India, Sri Lanka, and Bangladesh region.",
-                        "Conducted presentations on quarterly results of the portfolio companies to multiple teams, including Risk and Banking seniors."
-                     ] //
-                },
-                 {
-                    company: "Morningstar India Financial Services",
-                    location: "Mumbai, India",
-                    title: "Research Associate",
-                    dates: "Sept 2019 - March 2020",
-                    details: [
-                        "Worked under the Pitchbook team, which provides financial data on VC, PE, and M&A space covering the global market.",
-                        "Collated key data points on private companies in Venture Capital and Early-Stage space primarily in the NA (North America) region.",
-                        "Showcased the private market ecosystem, including various types of funding, key deals, management, business model for various start-ups and early-stage companies on the platform."
-                     ] //
-                },
-                 {
-                    company: "N C Chhajed & Associates Chartered Accountants",
-                    location: "Mumbai, India",
-                    title: "Audit Assistant",
-                    dates: "Jan 2016 - Jan 2019",
-                    details: [
-                        "Performed audit procedures on specific financial line items under the supervision of senior team members with the objective of ensuring that the financial statements are prepared, in all material aspects, in accordance with the applicable financial reporting framework.",
-                        "Carried internal audit of the company's books of accounts and finalization of books & financial statements.",
-                        "Assisted with tax audits and tax returns."
-                    ] //
+            // Generic function to populate a timeline
+            function populateTimeline(timelineElementId, detailsElementId, data) {
+                const timelineElement = document.getElementById(timelineElementId);
+                const detailsElement = document.getElementById(detailsElementId);
+
+                if (!timelineElement || !detailsElement) {
+                    console.error(`Timeline elements not found for ${timelineElementId} or ${detailsElementId}`);
+                    return;
                 }
-                // Add other experiences similarly
-            ];
 
-            const timelineElement = document.querySelector('#experience .timeline');
-            const detailsElement = document.getElementById('experience-details');
-            const prevButton = document.getElementById('prev-exp');
-            const nextButton = document.getElementById('next-exp');
-            let currentExperienceIndex = 0;
+                timelineElement.innerHTML = ''; // Clear existing items
 
-            function displayExperienceDetails(index) {
-                if (index < 0 || index >= experiences.length) return; // Boundary check
+                data.forEach((itemData, index) => {
+                    const item = document.createElement('div');
+                    item.classList.add('timeline-item');
+                    item.dataset.index = index; // Store index for easy access
+                    // Display institution/company, degree/title, and the full date range
+                    item.innerHTML = `<h4>${itemData.institution || itemData.company}</h4><p>${itemData.degree || itemData.title}</p><p><i>${itemData.dates}</i></p>`;
 
-                const exp = experiences[index];
-                let detailsHTML = `<h3>${exp.title} at ${exp.company}</h3>`;
-                detailsHTML += `<p><i>${exp.location} | ${exp.dates}</i></p>`;
-                detailsHTML += '<ul>';
-                exp.details.forEach(detail => {
-                    detailsHTML += `<li>${detail}</li>`;
+                    item.addEventListener('click', () => {
+                        displayDetails(detailsElementId, data, index);
+                    });
+
+                    timelineElement.appendChild(item);
                 });
-                detailsHTML += '</ul>';
-                detailsElement.innerHTML = detailsHTML;
 
-                // Update active state on timeline items
+                 // Display initial details
+                if (data.length > 0) {
+                    displayDetails(detailsElementId, data, 0);
+                } else {
+                     detailsElement.innerHTML = '<p>No details to display.</p>';
+                }
+            }
+
+            // Generic function to display details for a timeline item
+            function displayDetails(detailsElementId, data, index) {
+                 const detailsElement = document.getElementById(detailsElementId);
+                 const timelineElement = detailsElement.previousElementSibling.querySelector('.timeline'); // Get the corresponding timeline
+
+                 if (index < 0 || index >= data.length) return; // Boundary check
+
+                 const itemData = data[index];
+                 let detailsHTML = `<h3>${itemData.degree || itemData.title} at ${itemData.institution || itemData.company}</h3>`;
+                 detailsHTML += `<p><i>${itemData.location} | ${itemData.dates}</i></p>`;
+
+                 if (itemData.details && itemData.details.length > 0) {
+                     detailsHTML += '<ul>';
+                     itemData.details.forEach(detail => {
+                         detailsHTML += `<li>${detail}</li>`;
+                     });
+                     detailsHTML += '</ul>';
+                 }
+
+
+                 detailsElement.innerHTML = detailsHTML;
+
+                 // Update active state on timeline items
                  const timelineItems = timelineElement.querySelectorAll('.timeline-item');
                  timelineItems.forEach((item, i) => {
                     if (i === index) {
@@ -632,54 +601,156 @@
                         item.classList.remove('active');
                     }
                 });
+
+                // Update navigation button states (basic implementation)
+                const prevButton = timelineElement.nextElementSibling.querySelector('button:first-child');
+                const nextButton = timelineElement.nextElementSibling.querySelector('button:last-child');
+
+                if (prevButton) prevButton.disabled = index === 0;
+                if (nextButton) nextButton.disabled = index === data.length - 1;
             }
 
-            function populateTimeline() {
-                if (!timelineElement) return; // Ensure timeline element exists
-                timelineElement.innerHTML = ''; // Clear existing items
-                experiences.forEach((exp, index) => {
-                    const item = document.createElement('div');
-                    item.classList.add('timeline-item');
-                    item.dataset.index = index; // Store index for easy access
-                    item.innerHTML = `<h4>${exp.company}</h4><p>${exp.title}</p><p><i>${exp.dates.split('–')[0].trim()}</i></p>`; // Show company, title, and start year
+            // --- Education Data ---
+            const educationData = [
+                 {
+                    institution: "University of Connecticut (UCONN)",
+                    location: "Stamford, CT, USA",
+                    degree: "Master's in Science (MSc) in Financial Risk Management (FRM)",
+                    dates: "Aug 2022 – Dec 2023",
+                    details: [] // Add specific details if needed
+                },
+                {
+                    institution: "Chartered Financial Analyst (CFA) Institute",
+                    location: "Mumbai, India",
+                    degree: "Level III Candidate of Chartered Financial Analyst (CFA) program",
+                    dates: "2018 - 2022",
+                    details: []
+                },
+                 {
+                    institution: "Association of Chartered Certified Accountants (ACCA)",
+                    location: "Mumbai, India",
+                    degree: "Affiliate Member (IFRS accounting, Audit, and Assurance, Financial Management, Corporate Law, and Taxation)",
+                    dates: "Jan 2016 - Jan 2018",
+                    details: []
+                },
+                 {
+                    institution: "Institute of Management (IIM) Indore",
+                    location: "Indore, India",
+                    degree: "Business Analytics (IPBA)",
+                    dates: "Jan 2019 - Jan 2020",
+                    details: []
+                },
+                 {
+                    institution: "Gujarat University",
+                    location: "Ahmedabad, India",
+                    degree: "Bachelor of Commerce (B.com)",
+                    dates: "Jan 2014 - Jan 2017",
+                    details: []
+                }
+            ];
 
-                    item.addEventListener('click', () => {
-                        currentExperienceIndex = index;
-                        displayExperienceDetails(currentExperienceIndex);
+
+            // --- Experience Data ---
+            const experienceData = [
+                {
+                    company: "Datanimbus, INC",
+                    location: "Plano, TX, USA",
+                    title: "Business Development Analyst",
+                    dates: "Apr 2024 – Nov 2024",
+                    details: [
+                        "Supported business development and sales teams by assisting account executives, writing database queries, and building insightful tools for data-driven decision making.",
+                        "Led qualitative and quantitative analysis on the Datanimbus Finhub platform, empowering Financial Institutions with data and AI-driven advancements for new revenue streams, operational efficiency, and risk mitigation.",
+                        "Developed and maintained automated reports utilizing SQL and Python, providing actionable insights to internal business stakeholders and external partners."
+                    ]
+                },
+                {
+                    company: "University of Connecticut, Stamford",
+                    location: "Stamford, CT, USA",
+                    title: "Math Tutor",
+                    dates: "Sept 2023 - Dec 2023",
+                    details: [
+                        "Conducted personalized tutoring sessions for students at the University of Connecticut, Stamford, specializing in a comprehensive range of mathematical disciplines, including Algebra, Geometry, and Advanced Trigonometry, successfully clarifying concepts and solving queries to enhance academic performance.",
+                        "Awarded 'Tutor of the Month' for September '23."
+                    ]
+                },
+                {
+                    company: "Citicorp Services India Pvt. Ltd (Citi Group)",
+                    location: "Mumbai, India",
+                    title: "Credit Analyst",
+                    dates: "Jan 2021 - Jan 2022",
+                    details: [
+                        "Worked in the Independent Risk Assessment Unit (IRAU) of the bank.",
+                        "Performed fundamental credit analysis and communicated key findings in yearly and quarterly credit memos to various stakeholders for Banks, NBCF's and other financial institutions for India, Sri Lanka, and Bangladesh region.",
+                        "Conducted presentations on quarterly results of the portfolio companies to multiple teams, including Risk and Banking seniors."
+                     ]
+                },
+                 {
+                    company: "Morningstar India Financial Services",
+                    location: "Mumbai, India",
+                    title: "Research Associate",
+                    dates: "Sept 2019 - March 2020",
+                    details: [
+                        "Worked under the Pitchbook team, which provides financial data on VC, PE, and M&A space covering the global market.",
+                        "Collated key data points on private companies in Venture Capital and Early-Stage space primarily in the NA (North America) region.",
+                        "Showcased the private market ecosystem, including various types of funding, key deals, management, business model for various start-ups and early-stage companies on the platform."
+                     ]
+                },
+                 {
+                    company: "N C Chhajed & Associates Chartered Accountants",
+                    location: "Mumbai, India",
+                    title: "Audit Assistant",
+                    dates: "Jan 2016 - Jan 2019",
+                    details: [
+                        "Performed audit procedures on specific financial line items under the supervision of senior team members with the objective of ensuring that the financial statements are prepared, in all material aspects, in accordance with the applicable financial reporting framework.",
+                        "Carried internal audit of the company's books of accounts and finalization of books & financial statements.",
+                        "Assisted with tax audits and tax returns."
+                    ]
+                }
+            ];
+
+            // --- Initialize Timelines ---
+            populateTimeline('education-timeline', 'education-details', educationData);
+            populateTimeline('experience-timeline', 'experience-details', experienceData);
+
+
+            // --- Timeline Navigation ---
+            function setupTimelineNavigation(timelineId, detailsId, data) {
+                 const timelineElement = document.getElementById(timelineId);
+                 const prevButton = timelineElement.nextElementSibling.querySelector('button:first-child');
+                 const nextButton = timelineElement.nextElementSibling.querySelector('button:last-child');
+                 let currentIndex = 0; // Start at the first item
+
+                 // Find the initial active item index
+                 const initialActiveItem = timelineElement.querySelector('.timeline-item.active');
+                 if(initialActiveItem) {
+                     currentIndex = parseInt(initialActiveItem.dataset.index) || 0;
+                 }
+
+
+                 if (prevButton && nextButton) {
+                    prevButton.addEventListener('click', () => {
+                        if (currentIndex > 0) {
+                            currentIndex--;
+                            displayDetails(detailsId, data, currentIndex);
+                        }
                     });
 
-                    timelineElement.appendChild(item);
-                });
-
-                 // Display initial details
-                if (experiences.length > 0) {
-                    displayExperienceDetails(currentExperienceIndex);
-                } else {
-                     detailsElement.innerHTML = '<p>No experience details to display.</p>';
+                    nextButton.addEventListener('click', () => {
+                        if (currentIndex < data.length - 1) {
+                            currentIndex++;
+                            displayDetails(detailsId, data, currentIndex);
+                        }
+                    });
                 }
             }
 
-            // Navigation Button Logic
-             if (prevButton && nextButton) {
-                prevButton.addEventListener('click', () => {
-                    if (currentExperienceIndex > 0) {
-                        currentExperienceIndex--;
-                        displayExperienceDetails(currentExperienceIndex);
-                    }
-                });
+            // Setup navigation for both timelines
+            setupTimelineNavigation('education-timeline', 'education-details', educationData);
+            setupTimelineNavigation('experience-timeline', 'experience-details', experienceData);
 
-                nextButton.addEventListener('click', () => {
-                    if (currentExperienceIndex < experiences.length - 1) {
-                        currentExperienceIndex++;
-                        displayExperienceDetails(currentExperienceIndex);
-                    }
-                });
-            }
-
-            // Initialize timeline
-            populateTimeline();
 
         });
+
     </script>
 </body>
 </html>
