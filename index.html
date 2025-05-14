@@ -36,30 +36,49 @@
             border-bottom: #0059b3 3px solid; /* Lighter Blue */
             display: flex; /* Use flexbox for layout */
             align-items: center; /* Vertically align items */
-            justify-content: space-between; /* Space out items */
             flex-wrap: wrap; /* Allow items to wrap on smaller screens */
         }
 
         header .container {
              display: flex; /* Ensure container inside header also uses flex */
-             align-items: center;
-             justify-content: space-between;
-             flex-wrap: wrap;
+             flex-direction: column; /* Stack items vertically */
+             align-items: center; /* Center items horizontally */
              width: 100%; /* Make container take full width of header */
              padding-top: 0; /* Adjust padding */
              padding-bottom: 0;
         }
 
-        .header-content {
+        .header-top { /* Container for profile, info/nav, and download button */
             display: flex;
-            align-items: center;
-            flex-grow: 1; /* Allow content to take available space */
-            flex-wrap: wrap; /* Allow wrapping within content */
+            align-items: center; /* Align items vertically */
+            flex-wrap: wrap; /* Allow items to wrap */
+            justify-content: space-between; /* Space out items: profile/info-nav left, button right */
+            width: 100%; /* Take full width */
+            margin-bottom: 20px; /* Space below this section */
+        }
+
+        .header-left { /* New div to group profile and info/nav */
+            display: flex;
+            align-items: center; /* Align items vertically */
+            flex-wrap: wrap; /* Allow wrapping */
+            flex-grow: 1; /* Allow this section to take available space */
+        }
+
+        .header-info-nav { /* Group text and nav */
+            display: flex;
+            flex-direction: column; /* Stack text and nav vertically */
+            margin-left: 20px; /* Space between image and this block */
+        }
+
+
+        .header-content {
+            /* This div is no longer needed in the new structure */
+            display: none; /* Hide the old header-content */
         }
 
         .header-text {
-            margin-left: 20px; /* Space between image and text */
-            flex-grow: 1; /* Allow text to grow */
+            margin-left: 0; /* Remove left margin, handled by header-info-nav */
+            text-align: left; /* Align text to the left */
         }
 
         header h1 {
@@ -79,7 +98,14 @@
 
         header nav {
             float: none; /* Remove float */
-            margin-top: 0; /* Adjust margin */
+            margin-top: 10px; /* Add space above nav */
+            width: auto; /* Allow nav to take its natural width */
+            text-align: left; /* Align nav list to the left */
+        }
+
+        header nav ul {
+             padding: 0; /* Remove default list padding */
+             margin: 0; /* Remove default list margin */
         }
 
         header li {
@@ -108,6 +134,27 @@
             object-fit: cover; /* Ensure the image covers the area without distortion */
             display: block; /* Remove extra space below the image */
         }
+
+        /* Download Button Styling */
+        .download-button {
+            display: inline-block; /* Allows padding and margin */
+            background-color: #ffcc00; /* Eye-catching yellow */
+            color: #003366; /* Dark blue text */
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            /* Removed margin-top */
+            margin-left: 20px; /* Add space from nav */
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .download-button:hover {
+            background-color: #e6b800; /* Darker yellow on hover */
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+
 
         /* Sections */
         .section {
@@ -306,20 +353,30 @@
             header .container {
                  flex-direction: column;
             }
-            .header-content {
+            .header-top { /* Adjust header-top on small screens */
                 flex-direction: column;
                 text-align: center;
-                margin-bottom: 20px; /* Space below content */
+                margin-bottom: 15px; /* Reduce space below top section */
+            }
+             .header-left { /* Adjust header-left on small screens */
+                flex-direction: column;
+                align-items: center;
+                margin-bottom: 15px; /* Space below this section */
+             }
+            .header-info-nav { /* Adjust info/nav container on small screens */
+                 margin-left: 0;
+                 margin-top: 15px; /* Add space above info/nav */
+                 align-items: center; /* Center items within this container */
             }
             .header-text {
                 margin-left: 0;
-                margin-top: 10px; /* Space above text */
+                text-align: center; /* Center text on small screens */
             }
-            header nav ul {
-                padding: 0;
-                margin-top: 10px;
+            header nav {
+                margin-top: 10px; /* Space above nav */
+                text-align: center; /* Center nav list on small screens */
             }
-             header li {
+            header li {
                 display: block;
                 padding: 5px 0;
                 text-align: center;
@@ -337,6 +394,10 @@
              #contact h2 {
                 margin-bottom: 15px;
              }
+             .download-button {
+                 margin-top: 15px; /* Add space above the button on small screens */
+                 margin-left: 0; /* Remove left margin on small screens */
+             }
         }
 
         /* Animation trigger class */
@@ -346,23 +407,27 @@
 <body>
     <header>
         <div class="container">
-            <img src="profile_photo.jpg" alt="Gunjan Shah Profile Photo" class="profile-img">
+            <div class="header-top">
+                <div class="header-left"> <img src="profile_photo.jpg" alt="Gunjan Shah Profile Photo" class="profile-img">
 
-            <div class="header-content">
-                <div class="header-text">
-                    <h1>Gunjan Shah</h1>
-                    <p>Financial Analyst</p>
+                    <div class="header-info-nav">
+                        <div class="header-text">
+                            <h1>Gunjan Shah</h1>
+                            <p>Financial Analyst</p>
+                        </div>
+                        <nav>
+                            <ul>
+                                <li><a href="#contact">Contact Me</a></li>
+                                <li><a href="#about">About Me</a></li>
+                                <li><a href="#education">Education</a></li>
+                                <li><a href="#experience">Work Experience</a></li>
+                                <li><a href="#skills">Skills</a></li>
+                                <li><a href="#projects">Projects</a></li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
-                <nav>
-                    <ul>
-                        <li><a href="#contact">Contact Me</a></li>
-                        <li><a href="#about">About Me</a></li>
-                        <li><a href="#education">Education</a></li>
-                        <li><a href="#experience">Work Experience</a></li>
-                        <li><a href="#skills">Skills</a></li>
-                        <li><a href="#projects">Projects</a></li>
-                    </ul>
-                </nav>
+                <a href="download CV.pdf" download class="download-button">Download CV</a>
             </div>
         </div>
     </header>
