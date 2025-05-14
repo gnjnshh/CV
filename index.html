@@ -123,42 +123,32 @@
         }
 
         /* Skills Section */
-        .skill-bar-container {
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Center the bubbles */
+            gap: 15px; /* Space between bubbles */
             margin-top: 20px;
         }
 
-        .skill {
-            margin-bottom: 15px;
+        .skill-bubble {
+            background-color: #eaf2f8; /* Very light blue background */
+            color: #003366; /* Dark blue text */
+            padding: 10px 20px;
+            border-radius: 20px; /* Rounded corners for bubble effect */
+            border: 1px solid #d1e0ec;
+            font-size: 1em;
+            white-space: nowrap; /* Prevent text wrapping */
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-        .skill-name {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #003366;
+        .skill-bubble:hover {
+            background-color: #d1e0ec; /* Slightly darker on hover */
+            transform: translateY(-3px); /* Slight lift effect */
         }
 
-        .bar {
-            background-color: #e0e0e0; /* Light grey background for bar */
-            height: 20px;
-            border-radius: 10px;
-            overflow: hidden;
-        }
 
-        .level {
-            background-color: #0059b3; /* Lighter Blue for level */
-            height: 100%;
-            width: 0; /* Start width at 0 for animation */
-            border-radius: 10px;
-            transition: width 1.5s ease-out; /* Animation */
-            text-align: right;
-            padding-right: 5px;
-            line-height: 20px;
-            color: white;
-            font-size: 12px;
-        }
-
-        /* Timeline Styling (for both Experience and Education) */
+        /* Experience Timeline */
         .timeline-container {
             position: relative;
             margin-bottom: 20px; /* Space before details */
@@ -350,36 +340,7 @@
         }
 
         /* Animation trigger class */
-        .skill-animate .level {
-            width: var(--skill-level); /* Use CSS variable set by JS */
-        }
-
-        /* Additional animations for skills section */
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-30px);
-            }
-            60% {
-                transform: translateY(-15px);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        .skill-animate .level {
-            animation: bounce 2s ease-in-out, fadeIn 1.5s ease-in-out;
-        }
-
+        /* Removed skill bar animation classes as they are no longer used */
     </style>
 </head>
 <body>
@@ -447,25 +408,20 @@
     <section id="skills" class="container section">
         <h2>Skills</h2>
         <p>In-depth understanding of company's financial statements, knowledge of IFRS, IndAS, and US GAAP accounting standards/treatments, finance and economics theories, valuation of equity, derivatives, fixed income, and other asset classes, data manipulation, data visualization, data analysis, Excel, Python, SQL, financial modelling, scenario analysis, web scraping, analytical skills, numerical skills, articulative skills, presenting to an audience, content writing, Google Sheets and Statistics. </p>
-        <div class="skill-bar-container">
-             <div class="skill">
-                 <span class="skill-name">Financial Analysis</span>
-                 <div class="bar"><div class="level" style="width: 90%;"></div></div>
-             </div>
-             <div class="skill">
-                 <span class="skill-name">Python & SQL</span>
-                 <div class="bar"><div class="level" style="width: 80%;"></div></div>
-             </div>
-             <div class="skill">
-                 <span class="skill-name">Data Analytics</span>
-                 <div class="bar"><div class="level" style="width: 85%;"></div></div>
-             </div>
-             <div class="skill">
-                 <span class="skill-name">Credit Risk</span>
-                 <div class="bar"><div class="level" style="width: 88%;"></div></div>
-             </div>
-             </div>
-    </section>
+        <div class="skills-container">
+            <div class="skill-bubble">Excel</div>
+            <div class="skill-bubble">Python</div>
+            <div class="skill-bubble">Financial Modelling</div>
+            <div class="skill-bubble">Derivatives</div>
+            <div class="skill-bubble">Fixed Income</div>
+            <div class="skill-bubble">Data Analysis</div>
+            <div class="skill-bubble">Data Visualization</div>
+            <div class="skill-bubble">SQL</div>
+            <div class="skill-bubble">Credit Risk</div>
+            <div class="skill-bubble">VBA</div>
+            <div class="skill-bubble">Financial Analysis</div>
+        </div>
+        </section>
 
     <section id="projects" class="container section">
         <h2>Projects</h2>
@@ -508,29 +464,8 @@
 
 
             // --- Skill Bar Animation ---
-            const skillsSection = document.querySelector('#skills');
-            const skillLevels = document.querySelectorAll('#skills .level');
+            // Removed skill bar animation logic as it's no longer used
 
-            const skillObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('skill-animate');
-                        skillLevels.forEach(level => {
-                            // Set the target width as a CSS variable
-                            level.style.setProperty('--skill-level', level.style.width);
-                            // Trigger animation by applying the class
-                            level.closest('.skill').classList.add('skill-animate');
-                        });
-                        observer.unobserve(entry.target); // Stop observing once animated
-                    }
-                });
-            }, { threshold: 0.3 }); // Trigger when 30% visible
-
-            if (skillsSection) {
-                skillObserver.observe(skillsSection);
-            } else {
-                console.error("Skills section not found");
-            }
 
             // --- Interactive Timeline Functions ---
 
